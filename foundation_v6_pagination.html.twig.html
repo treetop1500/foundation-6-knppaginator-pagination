@@ -12,13 +12,12 @@
 <ul class="pagination" role="navigation" aria-label="Pagination">
     {% if previous is defined %}
         <li class="pagination-previous">
-            <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">{{ 'Previous'|trans }}</a>
+            <a aria-label="Previous page"
+               href="{{ path(route, query|merge({(pageParameterName): previous})) }}">{{ 'Previous'|trans }}</a>
         </li>
     {% else %}
-        <li class="disabled">
-            <a>
-                &laquo; {{ 'Previous'|trans }} <span class="show-for-sr">page</span>
-            </a>
+        <li class="pagination-previous disabled">
+            &laquo; {{ 'Previous'|trans }} <span class="show-for-sr">page</span>
         </li>
     {% endif %}
 
@@ -38,7 +37,7 @@
     {% for page in pagesInRange %}
         {% if page != current %}
             <li>
-                <a href="{{ path(route, query|merge({(pageParameterName): page})) }}">
+                <a href="{{ path(route, query|merge({(pageParameterName): page})) }}" aria-label="Page {{ page }}">
                     {{ page }}
                 </a>
             </li>
@@ -55,28 +54,28 @@
                 <li class="ellipsis" aria-hidden="true"></li>
             {% else %}
                 <li>
-                    <a href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}">
+                    <a href="{{ path(route, query|merge({(pageParameterName): (pageCount - 1)})) }}"
+                       aria-label="Page {{ pageCount - 1 }}">
                         {{ pageCount -1 }}
                     </a>
                 </li>
             {% endif %}
         {% endif %}
         <li>
-            <a href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
+            <a href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}"
+               aria-label="Page {{ pageCount }}">{{ pageCount }}</a>
         </li>
     {% endif %}
 
     {% if next is defined %}
         <li class="pagination-next">
-            <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+            <a aria-label="Next page" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
                 {{ 'Next'|trans }}
             </a>
         </li>
     {% else %}
-        <li class="disabled">
-            <a aria-label="Next page">
-                {{ 'Next'|trans }} <span class="show-for-sr">page</span>
-            </a>
+        <li class="pagination-next disabled">
+            {{ 'Next'|trans }} <span class="show-for-sr">page</span>
         </li>
     {% endif %}
 </ul>
